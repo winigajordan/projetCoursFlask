@@ -1,12 +1,12 @@
 from importlib.resources import path
-from flask import Flask
+from flask import Flask, flash
 import random
 
 
 app = Flask(__name__)
 path = 'template.html'
 
-@app.route('/')
+@app.route('/' )
 def index():
     return '<h1>Hi Jord</h1>'
 
@@ -86,6 +86,53 @@ def base():
 @app.route('/template/heritage/home')
 def home():
     return render_template('./heritage/home.html')
+
+#devoir cours 3
+
+@app.route('/template/devoir3/base')
+def baseDevoir3():
+    return render_template('./devoir_3/base.html')
+
+
+@app.route('/template/devoir3/')
+def indexDevoir3():
+    return render_template('./devoir_3/index.html')
+
+
+from flask import request
+from test import errors
+@app.route('/template/devoir3/validation', methods = ['post'])
+def validation():
+    erreurs = errors(request.form["login"])
+    return render_template('./devoir_3/rapport.html', erreurs = erreurs)
+
+
+#cours 4
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+
+
+class MyForm(FlaskForm):
+    login = StringField("Entrer votre login : ")
+    btnSubmit = SubmitField("Valider")
+
+app.config["SECRET_KEY"] = "Cm1dav|/XKvm)=("
+
+@app.route('/wtform', methods = ['GET','POST'])
+def form():
+    form = MyForm()
+    return render_template('./wtf_form/login.form.html', form = form)
+    if form.validate_on_submit():  
+        return render_template('./wtf_form/login.form.html', form = form)
+
+
+@app.errorhandler(404)
+def error404(e):
+    return render_template('./errors/notFound.html'),404
+
+
+
 
 
 if __name__ == '__main__':

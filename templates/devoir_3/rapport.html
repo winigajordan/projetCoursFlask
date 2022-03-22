@@ -1,0 +1,16 @@
+{% extends './devoir_3/base.html' %}
+
+{%block title%} {{super()}} | index {%endblock%}
+
+{% block content %}
+
+<div class = "container">
+    <h2>
+        Rapport : {{erreurs}}
+    </h2>
+    <a href = "{{url_for('indexDevoir3')}}">
+        Reessayer
+    </a>
+</div>
+
+{% endblock %}

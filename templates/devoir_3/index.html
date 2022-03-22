@@ -1,0 +1,17 @@
+{% extends './devoir_3/base.html' %}
+
+{%block title%} {{super()}} | Index {%endblock%}
+
+{% block content %} 
+
+<div class = "container">
+    <form action = "{{url_for('validation')}}" method = "post">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"> <strong>Login à valider</strong></label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="login">
+        </div>
+        <button type="submit" class="btn btn-primary">Tester</button>
+    </form>
+</div>
+
+{%endblock%}
